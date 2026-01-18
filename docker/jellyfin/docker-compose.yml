@@ -1,0 +1,17 @@
+# Jellyfin – Docker Deployment
+
+This folder contains the Docker configuration used to deploy the Jellyfin media server in my Home Lab environment.
+
+---
+
+## 📌 Overview
+
+Jellyfin is an open‑source media server used to stream movies, series, and personal media across devices.  
+In my Home Lab, Jellyfin runs inside a Docker container on a Linux VM managed by Proxmox.
+
+---
+
+## 📁 Folder Structure
+
+All Jellyfin data is stored under:
+
