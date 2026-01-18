@@ -1,0 +1,28 @@
+
+Inside this directory:
+
+- `config/` → Jellyfin configuration files  
+- `cache/` → Transcoding and temporary data  
+- `/home/danilo/media` → My media library (movies, series, music)
+
+---
+
+## 🐳 Docker Compose File
+
+Below is the exact `docker-compose.yml` used in this deployment:
+
+```yaml
+version: "3.8"
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    network_mode: bridge
+    ports:
+      - "8096:8096"
+    volumes:
+      - /home/danilo/docker/jellyfin/config:/config
+      - /home/danilo/docker/jellyfin/cache:/cache
+      - /home/danilo/media:/media
+    restart: unless-stopped
