@@ -15,3 +15,91 @@ In my Home Lab, Jellyfin runs inside a Docker container on a Linux VM managed by
 
 All Jellyfin data is stored under:
 
+/home/danilo/docker/jellyfin/
+
+
+Inside this directory:
+
+- `config/` → Jellyfin configuration files  
+- `cache/` → Transcoding and temporary data  
+- `/home/danilo/media` → My media library (movies, series, music)
+
+---
+
+## 🐳 Docker Compose File
+
+Below is the exact `docker-compose.yml` used in this deployment:
+
+```yaml
+version: "3.8"
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    network_mode: bridge
+    ports:
+      - "8096:8096"
+    volumes:
+      - /home/danilo/docker/jellyfin/config:/config
+      - /home/danilo/docker/jellyfin/cache:/cache
+      - /home/danilo/media:/media
+    restart: unless-stopped
+
+📡 Network
+Jellyfin Web UI:
+http://<server-ip>:8096
+
+Network mode: bridge
+
+No custom VLAN required for this service
+
+🔄 Backups
+The following folders are included in my automated rsync backup routine:
+/home/danilo/docker/jellyfin/config
+/home/danilo/docker/jellyfin/cache
+Media files are not backed up automatically due to size.
+
+🧪 Testing
+After deploying:
+
+Access the UI
+
+Add /media as the main library
+
+Validate transcoding
+
+Test playback on mobile and TV
+
+📈 Future Improvements
+Add hardware transcoding (Intel QuickSync)
+
+Add monitoring via Grafana + Prometheus
+
+Move media to a dedicated NAS
+
+---
+
+# 📄 **2. docker/jellyfin/docker-compose.yml (arquivo real)**
+
+Crie este arquivo em:
+docker/jellyfin/docker-compose.yml
+
+
+Com o conteúdo:
+
+```yaml
+version: "3.8"
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    network_mode: bridge
+    ports:
+      - "8096:8096"
+    volumes:
+      - /home/danilo/docker/jellyfin/config:/config
+      - /home/danilo/docker/jellyfin/cache:/cache
+      - /home/danilo/media:/media
+    restart: unless-stopped
